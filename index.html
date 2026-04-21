@@ -932,7 +932,7 @@
 
       fetchLiveData().then(success => {
         if (success) {
-          document.getElementById('demoBanner').style.display = 'none';
+          document.getElementById('demoBanner').innerHTML = 'LIVE MODE — Connected to Google Sheet <button class="live-btn" onclick="switchToDemo()">Back to Demo</button>';
           document.getElementById('statusText').textContent = 'Live';
           if (refreshInterval) clearInterval(refreshInterval);
           refreshInterval = setInterval(fetchLiveData, 8000);
@@ -941,6 +941,16 @@
           document.getElementById('statusText').textContent = 'Connection failed';
         }
       });
+    }
+
+    function switchToDemo() {
+      isLive = false;
+      if (refreshInterval) clearInterval(refreshInterval);
+      refreshInterval = null;
+      rawRows = generateDemoData();
+      updateDashboard(rawRows);
+      document.getElementById('demoBanner').innerHTML = 'DEMO MODE — Showing sample data <button class="live-btn" onclick="switchToLive()">Go Live</button>';
+      document.getElementById('statusText').textContent = 'Demo mode';
     }
 
     async function fetchLiveData() {
