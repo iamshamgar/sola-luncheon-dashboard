@@ -297,11 +297,79 @@
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
+      /* Layout */
       .chart-grid { grid-template-columns: 1fr; }
-      .chart-container { height: 280px; }
       .gap-container, .hope-pair { grid-template-columns: 1fr; }
-      header h1 { font-size: 1.5rem; }
-      .feelings-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+      .panel { padding: 1rem 0.75rem; }
+
+      /* Header */
+      header { padding: 1rem 0.75rem 0.5rem; }
+      header h1 { font-size: 1.3rem; }
+      header p { font-size: 0.8rem; }
+
+      /* Status bar */
+      .status-bar {
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        padding: 0.5rem 0.75rem;
+      }
+      .status-item { font-size: 0.78rem; }
+      .response-count { font-size: 1.8rem; }
+
+      /* Navigation tabs */
+      nav { padding: 0.75rem 0.5rem; gap: 0.35rem; }
+      nav button {
+        padding: 0.45rem 0.85rem;
+        font-size: 0.78rem;
+      }
+
+      /* Demo banner */
+      .demo-banner {
+        flex-wrap: wrap;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.5rem;
+        gap: 0.5rem;
+      }
+
+      /* KPI cards */
+      .kpi-row {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .kpi-card { padding: 0.75rem 0.5rem; border-radius: 0.75rem; }
+      .kpi-card .kpi-value { font-size: 1.8rem; }
+      .kpi-card .kpi-label { font-size: 0.7rem; }
+
+      /* Chart cards */
+      .chart-card { padding: 1rem; border-radius: 0.75rem; }
+      .chart-card h3 { font-size: 0.9rem; margin-bottom: 0.75rem; }
+      .chart-card .chart-subtitle { font-size: 0.72rem; }
+      .chart-container { height: 260px; }
+      .chart-container.tall { height: 320px; }
+      .chart-container.short { height: 220px; }
+
+      /* Church feed */
+      .church-feed { max-height: 250px; padding: 1rem; border-radius: 0.75rem; }
+      .church-feed .church-tag { font-size: 0.75rem; padding: 0.25rem 0.6rem; }
+
+      /* Feelings cards */
+      .feelings-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .feeling-card { padding: 1rem; border-radius: 0.75rem; }
+      .feeling-card .label { font-size: 0.75rem; min-height: 2.2rem; }
+      .feeling-card .percentage { font-size: 2.5rem; }
+      .feeling-card .count { font-size: 0.7rem; }
+      .feeling-card .benchmark { font-size: 0.65rem; }
+
+      /* Gap chart heights */
+      .gap-container .chart-container { height: 260px !important; }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 400px) {
+      .feelings-grid { grid-template-columns: 1fr; }
+      .kpi-row { grid-template-columns: 1fr; }
+      nav button { padding: 0.4rem 0.7rem; font-size: 0.72rem; }
     }
   </style>
 </head>
