@@ -19,6 +19,8 @@
       --rose: #f43f5e;
       --cyan: #06b6d4;
       --orange: #f97316;
+      --card-border: rgba(255,255,255,0.05);
+      --grid-line: rgba(255,255,255,0.05);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,24 +32,51 @@
       min-height: 100vh;
     }
 
+    /* ── Demo Banner ── */
+    .demo-banner {
+      background: var(--accent);
+      color: var(--bg);
+      text-align: center;
+      padding: 0.5rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+    .demo-banner:hover { background: #d97706; }
+    .demo-banner .live-btn {
+      background: var(--bg);
+      color: var(--accent);
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .demo-banner .live-btn:hover { background: #1a2744; }
+
+    /* ── Header ── */
     header {
       text-align: center;
-      padding: 2rem 1rem 1rem;
+      padding: 1.5rem 1rem 0.75rem;
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-
     header h1 {
       font-size: 2rem;
       font-weight: 700;
       color: var(--accent);
     }
-
     header p {
       color: var(--muted);
       margin-top: 0.25rem;
       font-size: 0.95rem;
     }
 
+    /* ── Status Bar ── */
     .status-bar {
       display: flex;
       justify-content: center;
@@ -55,9 +84,8 @@
       gap: 1.5rem;
       padding: 0.75rem;
       background: var(--card);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid var(--card-border);
     }
-
     .status-item {
       display: flex;
       align-items: center;
@@ -65,27 +93,23 @@
       font-size: 0.85rem;
       color: var(--muted);
     }
-
     .status-item .dot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--green);
       animation: pulse 2s infinite;
     }
-
     @keyframes pulse {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.4; }
     }
-
     .response-count {
       font-size: 2.5rem;
       font-weight: 800;
       color: var(--accent);
     }
 
-    /* Navigation */
+    /* ── Navigation ── */
     nav {
       display: flex;
       justify-content: center;
@@ -93,7 +117,6 @@
       padding: 1rem;
       flex-wrap: wrap;
     }
-
     nav button {
       background: var(--card);
       color: var(--muted);
@@ -104,167 +127,194 @@
       font-size: 0.9rem;
       transition: all 0.2s;
     }
-
     nav button:hover { border-color: var(--accent); color: var(--text); }
     nav button.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
 
-    /* Panels */
-    .panel { display: none; padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
+    /* ── Panels ── */
+    .panel { display: none; padding: 1.5rem; max-width: 1300px; margin: 0 auto; }
     .panel.active { display: block; }
 
     .chart-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
       gap: 1.5rem;
+    }
+    .chart-grid.full-width {
+      grid-template-columns: 1fr;
     }
 
     .chart-card {
       background: var(--card);
       border-radius: 1rem;
       padding: 1.5rem;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
     }
-
     .chart-card h3 {
       font-size: 1rem;
       color: var(--muted);
       margin-bottom: 1rem;
       font-weight: 500;
     }
-
+    .chart-card .chart-subtitle {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: -0.75rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
     .chart-container {
       position: relative;
       width: 100%;
-      height: 350px;
+      height: 320px;
+    }
+    .chart-container.tall { height: 420px; }
+    .chart-container.short { height: 260px; }
+
+    /* ── Overview KPI Row ── */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .kpi-card {
+      background: var(--card);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--card-border);
+      text-align: center;
+    }
+    .kpi-card .kpi-value {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+    .kpi-card .kpi-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
     }
 
-    .chart-container.tall {
-      height: 450px;
+    /* ── Church Name Feed ── */
+    .church-feed {
+      background: var(--card);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border: 1px solid var(--card-border);
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .church-feed h3 {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .church-feed .church-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .church-feed .church-tag {
+      background: rgba(245,158,11,0.12);
+      color: var(--accent);
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border: 1px solid rgba(245,158,11,0.2);
     }
 
-    /* Feelings grid */
+    /* ── Feelings Cards ── */
     .feelings-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1rem;
     }
-
     .feeling-card {
       background: var(--card);
       border-radius: 1rem;
       padding: 1.5rem;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
       text-align: center;
+      position: relative;
     }
-
     .feeling-card .label {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .feeling-card .percentage {
-      font-size: 3rem;
-      font-weight: 800;
-    }
-
-    .feeling-card .count {
       font-size: 0.85rem;
       color: var(--muted);
+      margin-bottom: 0.5rem;
+      min-height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
+    .feeling-card .percentage {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .feeling-card .count {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
     .feeling-card .bar-bg {
       margin-top: 0.75rem;
       height: 6px;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.08);
       border-radius: 3px;
       overflow: hidden;
     }
-
     .feeling-card .bar-fill {
       height: 100%;
       border-radius: 3px;
       transition: width 0.8s ease;
     }
-
-    /* Setup panel */
-    .setup-card {
-      background: var(--card);
-      border-radius: 1rem;
-      padding: 2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      border: 1px solid rgba(255,255,255,0.05);
+    .feeling-card .benchmark {
+      margin-top: 0.6rem;
+      font-size: 0.75rem;
+      color: #64748b;
     }
-
-    .setup-card h2 { color: var(--accent); margin-bottom: 1rem; }
-    .setup-card p { color: var(--muted); line-height: 1.6; margin-bottom: 0.75rem; }
-    .setup-card code {
-      background: rgba(255,255,255,0.1);
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
-    }
-    .setup-card input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      background: var(--bg);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 0.5rem;
-      color: var(--text);
-      font-size: 1rem;
-      margin: 0.5rem 0;
-    }
-    .setup-card input:focus { outline: none; border-color: var(--accent); }
-
-    .setup-card button.connect-btn {
-      background: var(--accent);
-      color: var(--bg);
-      border: none;
-      padding: 0.75rem 2rem;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 0.5rem;
-    }
-
-    .setup-card .steps { margin: 1rem 0; }
-    .setup-card .steps li {
+    .feeling-card .benchmark span {
       color: var(--muted);
-      margin-bottom: 0.5rem;
-      line-height: 1.5;
-    }
-
-    .demo-banner {
-      background: var(--accent);
-      color: var(--bg);
-      text-align: center;
-      padding: 0.5rem;
       font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
     }
 
-    .demo-banner:hover { background: #d97706; }
+    /* ── The Gap Side-by-Side ── */
+    .gap-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
 
-    /* Responsive */
+    /* ── Hope Before/After ── */
+    .hope-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* ── Responsive ── */
     @media (max-width: 768px) {
       .chart-grid { grid-template-columns: 1fr; }
       .chart-container { height: 280px; }
+      .gap-container, .hope-pair { grid-template-columns: 1fr; }
       header h1 { font-size: 1.5rem; }
+      .feelings-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
     }
   </style>
 </head>
 <body>
 
-  <div class="demo-banner" id="demoBanner" onclick="loadDemoData()">
-    ⚡ DEMO MODE — Click to load sample data (connect Google Sheet for live data) ⚡
+  <div class="demo-banner" id="demoBanner">
+    DEMO MODE — Showing sample data from real Chinese heritage churches
+    <button class="live-btn" onclick="switchToLive()">Switch to Live</button>
   </div>
 
   <header>
     <h1>CHCC Luncheon — Live Results</h1>
-    <p>SOLA Network · Asian American Leadership Conference</p>
+    <p>SOLA Network &middot; Chinese Heritage Church Leaders Gathering</p>
   </header>
 
   <div class="status-bar">
@@ -275,110 +325,212 @@
     <div class="status-item">
       Responses: <span class="response-count" id="responseCount">0</span>
     </div>
-    <div class="status-item" id="lastUpdated">—</div>
+    <div class="status-item" id="lastUpdated">&mdash;</div>
   </div>
 
   <nav id="mainNav">
     <button class="active" data-panel="overview">Overview</button>
-    <button data-panel="churches">Churches</button>
-    <button data-panel="feelings">How We're Feeling</button>
-    <button data-panel="setup">Setup</button>
+    <button data-panel="churches">Our Churches</button>
+    <button data-panel="feelings">How We're Doing</button>
+    <button data-panel="hope">Hope &amp; Future</button>
   </nav>
 
-  <!-- OVERVIEW PANEL -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  TAB 1 — OVERVIEW                                        -->
+  <!-- ══════════════════════════════════════════════════════════ -->
   <div class="panel active" id="panel-overview">
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-value" id="kpiResponses">0</div>
+        <div class="kpi-label">Responses</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value" id="kpiChurches">0</div>
+        <div class="kpi-label">Churches</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value" id="kpiStates">0</div>
+        <div class="kpi-label">States Represented</div>
+      </div>
+    </div>
     <div class="chart-grid">
-      <div class="chart-card">
-        <h3>Responses Over Time</h3>
-        <div class="chart-container">
-          <canvas id="chartTimeline"></canvas>
-        </div>
+      <div class="church-feed" id="churchFeed">
+        <h3>Churches Represented</h3>
+        <div class="church-tags" id="churchTags"></div>
       </div>
       <div class="chart-card">
-        <h3>Churches by State</h3>
+        <h3>Responses by State</h3>
         <div class="chart-container">
           <canvas id="chartStates"></canvas>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  TAB 2 — OUR CHURCHES                                    -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="panel" id="panel-churches">
+    <div class="chart-grid">
       <div class="chart-card">
-        <h3>Number of Languages Used in Ministry</h3>
+        <h3>Roles in the Room</h3>
+        <div class="chart-container tall">
+          <canvas id="chartRoles"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>The Multilingual Reality</h3>
+        <p class="chart-subtitle">Languages used in regular services and ministries</p>
         <div class="chart-container">
           <canvas id="chartLanguages"></canvas>
         </div>
       </div>
+    </div>
+
+    <!-- THE GAP -->
+    <div style="margin-top:1.5rem;">
       <div class="chart-card">
-        <h3>Staff Size</h3>
-        <div class="chart-container">
-          <canvas id="chartStaff"></canvas>
+        <h3>The Gap: Congregation Size vs. Staff Proportion</h3>
+        <p class="chart-subtitle">English-speaking congregation size (left) vs. pastoral staff serving English ministry (right)</p>
+        <div class="gap-container">
+          <div class="chart-container" style="height:340px">
+            <canvas id="chartCongSize"></canvas>
+          </div>
+          <div class="chart-container" style="height:340px">
+            <canvas id="chartStaffProp"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid" style="margin-top:1.5rem;">
+      <div class="chart-card">
+        <h3>Age Groups in English-Speaking Congregations</h3>
+        <div class="chart-container tall">
+          <canvas id="chartAgeGroups"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>Where Do Our Youth Go?</h3>
+        <p class="chart-subtitle">When youth graduate and move on, what do you typically see?</p>
+        <div class="chart-container tall">
+          <canvas id="chartYouthRetention"></canvas>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CHURCHES PANEL -->
-  <div class="panel" id="panel-churches">
-    <div class="chart-grid">
-      <div class="chart-card">
-        <h3>All Churches Represented</h3>
-        <div class="chart-container tall">
-          <canvas id="chartChurches"></canvas>
-        </div>
-      </div>
-      <div class="chart-card">
-        <h3>Churches by State</h3>
-        <div class="chart-container tall">
-          <canvas id="chartStatesDetail"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FEELINGS PANEL -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  TAB 3 — HOW WE'RE DOING                                 -->
+  <!-- ══════════════════════════════════════════════════════════ -->
   <div class="panel" id="panel-feelings">
-    <div class="feelings-grid" id="feelingsGrid">
-      <!-- Populated by JS -->
-    </div>
+    <p style="text-align:center;color:var(--muted);margin-bottom:1.5rem;font-size:0.95rem;">In the past 12 months, have you experienced...</p>
+    <div class="feelings-grid" id="feelingsGrid"></div>
   </div>
 
-  <!-- SETUP PANEL -->
-  <div class="panel" id="panel-setup">
-    <div class="setup-card">
-      <h2>Connect Your Google Sheet</h2>
-      <p>To show live data from your Google Form responses:</p>
-      <ol class="steps">
-        <li>Create your Google Form and link it to a Google Sheet</li>
-        <li>In Google Sheets, go to <strong>File → Share → Publish to the web</strong></li>
-        <li>Choose the response sheet tab, select <strong>CSV</strong> format, and click Publish</li>
-        <li>Copy the published CSV URL and paste it below</li>
-      </ol>
-      <input type="text" id="sheetUrl" placeholder="Paste your published Google Sheet CSV URL here...">
-      <br>
-      <p style="font-size:0.85rem;">Expected columns (in order): <code>Timestamp</code>, <code>Church Name</code>, <code>City</code>, <code>State</code>, <code>Languages</code>, <code>Staff Size</code>, then one column per feeling question (values: Yes/No or 1-5 scale)</p>
-      <br>
-      <button class="connect-btn" onclick="connectSheet()">Connect & Go Live</button>
-      <p id="connectStatus" style="margin-top:0.75rem; font-size:0.9rem;"></p>
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  TAB 4 — HOPE & FUTURE                                   -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="panel" id="panel-hope">
+    <div class="chart-card">
+      <h3>How Hopeful Are We About the Future of the Chinese Heritage Church?</h3>
+      <div class="hope-pair">
+        <div>
+          <p style="text-align:center;color:var(--muted);font-size:0.9rem;margin-bottom:0.75rem;font-weight:600;">Five Years Ago</p>
+          <div class="chart-container" style="height:320px;">
+            <canvas id="chartHopePast"></canvas>
+          </div>
+        </div>
+        <div>
+          <p style="text-align:center;color:var(--accent);font-size:0.9rem;margin-bottom:0.75rem;font-weight:600;">Today</p>
+          <div class="chart-container" style="height:320px;">
+            <canvas id="chartHopeToday"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid" style="margin-top:1.5rem;">
+      <div class="chart-card">
+        <h3>Where Are We Headed?</h3>
+        <p class="chart-subtitle">Which future do you see for our church moving forward?</p>
+        <div class="chart-container tall">
+          <canvas id="chartTrajectory"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>What Gives Us Hope</h3>
+        <p class="chart-subtitle">Sorted by frequency — each person could select multiple</p>
+        <div class="chart-container tall">
+          <canvas id="chartHopeSources"></canvas>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
     // =========================================================
-    //  CONFIG — placeholder feeling prompts (easy to change)
+    //  CSV COLUMN MAPPING (matches Google Sheet headers exactly)
     // =========================================================
-    const FEELING_PROMPTS = [
-      { key: 'lonely', label: 'Lonely', color: '#3b82f6' },
-      { key: 'like_quitting', label: 'Like quitting', color: '#f43f5e' },
-      { key: 'affirmed', label: 'Affirmed in my calling', color: '#22c55e' },
-      { key: 'overwhelmed', label: 'Overwhelmed', color: '#f97316' },
-      { key: 'supported', label: 'Supported by my community', color: '#a855f7' },
-      { key: 'hopeful', label: 'Hopeful about the future', color: '#06b6d4' },
+    const COL = {
+      TIMESTAMP: 0,
+      CHURCH_NAME: 1,
+      CITY: 2,
+      STATE: 3,
+      ROLE: 4,
+      LANGUAGES: 5,
+      CONG_SIZE: 6,
+      STAFF_PROP: 7,
+      AGE_GROUPS: 8,
+      YOUTH_RETENTION: 9,
+      LONELY: 10,
+      LIKE_QUITTING: 11,
+      OVERWHELMED: 12,
+      AFFIRMED: 13,
+      CANT_SPEAK_OPENLY: 14,
+      HOPE_PAST: 15,
+      HOPE_TODAY: 16,
+      TRAJECTORY: 17,
+      WHAT_GIVES_HOPE: 18
+    };
+
+    // =========================================================
+    //  FEELINGS CONFIG
+    // =========================================================
+    const FEELING_CARDS = [
+      { colIdx: COL.LONELY,             label: 'Feeling lonely in ministry',                      color: '#3b82f6', tone: 'negative', benchmarkPct: 42, benchmarkLabel: 'National avg: 42%' },
+      { colIdx: COL.LIKE_QUITTING,      label: 'Feeling like quitting ministry',                  color: '#f43f5e', tone: 'negative', benchmarkPct: 24, benchmarkLabel: 'National avg: 24%' },
+      { colIdx: COL.OVERWHELMED,        label: 'Feeling overwhelmed by demands of ministry',      color: '#f97316', tone: 'negative', benchmarkPct: 57, benchmarkLabel: 'National avg: 57%' },
+      { colIdx: COL.AFFIRMED,           label: 'Feeling affirmed in your calling',                color: '#22c55e', tone: 'positive', benchmarkPct: null, benchmarkLabel: null },
+      { colIdx: COL.CANT_SPEAK_OPENLY,  label: "Feeling like you can't speak openly about struggles", color: '#a855f7', tone: 'negative', benchmarkPct: 25, benchmarkLabel: 'National avg: 25% (inverted from 75% who can)' },
     ];
+
+    // =========================================================
+    //  HOPEFULNESS LABELS
+    // =========================================================
+    const HOPE_LEVELS = [
+      'Not hopeful at all',
+      'Slightly hopeful',
+      'Moderately hopeful',
+      'Very hopeful',
+      'Extremely hopeful'
+    ];
+
+    // Warm color palette: muted for "past", saturated for "today"
+    const HOPE_COLORS_PAST  = ['#78350f','#92400e','#a16207','#b45309','#ca8a04'];
+    const HOPE_COLORS_TODAY = ['#dc2626','#ea580c','#f59e0b','#84cc16','#22c55e'];
 
     // =========================================================
     //  STATE
     // =========================================================
     let charts = {};
     let refreshInterval = null;
-    let rawData = [];
+    let rawRows = [];
+    let isLive = false;
+
+    const LIVE_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vStR1ZJjVKV6bsiZ48LgiLeAR-eKpT5ywiP-pZoQL3utQvnBCQGbePpfwHhBxmzxsVAxoeyBZ-vNfBN/pub?gid=151037683&single=true&output=csv';
+
+    const CHART_COLORS = ['#f59e0b','#3b82f6','#22c55e','#f43f5e','#a855f7','#06b6d4','#f97316','#ec4899','#14b8a6','#8b5cf6','#ef4444','#10b981','#6366f1','#d946ef'];
 
     // =========================================================
     //  NAV
@@ -399,9 +551,81 @@
     Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
     Chart.register(ChartDataLabels);
 
-    const CHART_COLORS = ['#f59e0b','#3b82f6','#22c55e','#f43f5e','#a855f7','#06b6d4','#f97316','#ec4899','#14b8a6','#8b5cf6','#ef4444','#10b981'];
+    // =========================================================
+    //  CSV PARSER
+    // =========================================================
+    function parseCSVLine(line) {
+      const result = [];
+      let current = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') { inQuotes = !inQuotes; }
+        else if (ch === ',' && !inQuotes) { result.push(current.trim()); current = ''; }
+        else { current += ch; }
+      }
+      result.push(current.trim());
+      return result;
+    }
 
-    function chartOpts(type, extra = {}) {
+    function parseCSV(text) {
+      const lines = text.split('\n').filter(l => l.trim());
+      if (lines.length < 2) return [];
+      // Skip header row
+      const rows = [];
+      for (let i = 1; i < lines.length; i++) {
+        const cols = parseCSVLine(lines[i]);
+        if (cols.length < 10) continue; // need at least through youth retention
+        rows.push(cols);
+      }
+      return rows;
+    }
+
+    // =========================================================
+    //  HELPERS
+    // =========================================================
+    function countValues(rows, colIdx) {
+      const map = {};
+      rows.forEach(r => {
+        const val = (r[colIdx] || '').trim();
+        if (val) map[val] = (map[val] || 0) + 1;
+      });
+      return map;
+    }
+
+    function countCheckboxValues(rows, colIdx) {
+      const map = {};
+      rows.forEach(r => {
+        const val = (r[colIdx] || '').trim();
+        if (!val) return;
+        val.split(',').forEach(v => {
+          const clean = v.trim();
+          if (clean) map[clean] = (map[clean] || 0) + 1;
+        });
+      });
+      return map;
+    }
+
+    function sortedEntries(map, desc = true) {
+      return Object.entries(map).sort((a, b) => desc ? b[1] - a[1] : a[1] - b[1]);
+    }
+
+    function pctYes(rows, colIdx) {
+      let yes = 0, total = 0;
+      rows.forEach(r => {
+        const val = (r[colIdx] || '').trim().toLowerCase();
+        if (val === 'yes' || val === 'no') {
+          total++;
+          if (val === 'yes') yes++;
+        }
+      });
+      return { yes, total, pct: total > 0 ? Math.round((yes / total) * 100) : 0 };
+    }
+
+    // =========================================================
+    //  CHART HELPERS
+    // =========================================================
+    function baseOpts(extras = {}) {
       return {
         responsive: true,
         maintainAspectRatio: false,
@@ -410,83 +634,143 @@
           legend: { display: false },
           datalabels: {
             color: '#f1f5f9',
-            font: { weight: 'bold', size: 12 },
-            anchor: 'end',
-            align: 'end',
-            ...extra.datalabels
+            font: { weight: 'bold', size: 11 },
+            ...extras.datalabels
           }
         },
-        scales: type === 'bar' ? {
-          x: { grid: { color: 'rgba(255,255,255,0.05)' } },
-          y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
-        } : type === 'horizontalBar' ? {
-          x: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true },
-          y: { grid: { color: 'rgba(255,255,255,0.05)' } }
-        } : undefined,
-        ...extra
+        ...extras
       };
+    }
+
+    function barScales() {
+      return {
+        x: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true },
+        y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
+      };
+    }
+
+    function hBarScales() {
+      return {
+        x: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true },
+        y: { grid: { color: 'rgba(255,255,255,0.05)' } }
+      };
+    }
+
+    // Truncate long labels
+    function truncLabel(s, max) {
+      if (!max) max = 40;
+      return s.length > max ? s.substring(0, max - 1) + '...' : s;
     }
 
     // =========================================================
     //  INIT CHARTS
     // =========================================================
     function initCharts() {
-      // Timeline (line)
-      charts.timeline = new Chart(document.getElementById('chartTimeline'), {
-        type: 'line',
-        data: { labels: [], datasets: [{ data: [], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.1)', fill: true, tension: 0.3, pointRadius: 4 }] },
-        options: { ...chartOpts('line'), plugins: { legend: { display: false }, datalabels: { display: false } } }
-      });
-
-      // States (bar)
+      // Overview: States bar
       charts.states = new Chart(document.getElementById('chartStates'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
-        options: chartOpts('bar')
+        options: baseOpts({ scales: barScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+      });
+
+      // Our Churches: Roles (horizontal bar)
+      charts.roles = new Chart(document.getElementById('chartRoles'), {
+        type: 'bar',
+        data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
       });
 
       // Languages (doughnut)
       charts.languages = new Chart(document.getElementById('chartLanguages'), {
         type: 'doughnut',
-        data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
-        options: { ...chartOpts('doughnut', { datalabels: { formatter: (v, ctx) => ctx.chart.data.labels[ctx.dataIndex] + ' (' + v + ')' } }), cutout: '50%' }
+        data: { labels: [], datasets: [{ data: [], backgroundColor: ['#3b82f6','#f59e0b','#22c55e','#a855f7'] }] },
+        options: baseOpts({
+          cutout: '50%',
+          plugins: {
+            legend: { display: true, position: 'bottom', labels: { color: '#94a3b8', padding: 16, font: { size: 12 } } },
+            datalabels: {
+              color: '#f1f5f9',
+              font: { weight: 'bold', size: 14 },
+              formatter: (v) => v
+            }
+          }
+        })
       });
 
-      // Staff (bar)
-      charts.staff = new Chart(document.getElementById('chartStaff'), {
+      // Congregation size (horizontal bar — left side of gap)
+      charts.congSize = new Chart(document.getElementById('chartCongSize'), {
         type: 'bar',
-        data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
-        options: chartOpts('bar')
+        data: { labels: [], datasets: [{ data: [], backgroundColor: '#3b82f6' }] },
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
       });
 
-      // Churches detail (horizontal bar)
-      charts.churches = new Chart(document.getElementById('chartChurches'), {
+      // Staff proportion (horizontal bar — right side of gap)
+      charts.staffProp = new Chart(document.getElementById('chartStaffProp'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: '#f59e0b' }] },
-        options: { ...chartOpts('horizontalBar'), indexAxis: 'y' }
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
       });
 
-      // States detail (horizontal bar)
-      charts.statesDetail = new Chart(document.getElementById('chartStatesDetail'), {
+      // Age groups (horizontal bar)
+      charts.ageGroups = new Chart(document.getElementById('chartAgeGroups'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
-        options: { ...chartOpts('horizontalBar'), indexAxis: 'y' }
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+      });
+
+      // Youth retention (horizontal bar)
+      charts.youthRetention = new Chart(document.getElementById('chartYouthRetention'), {
+        type: 'bar',
+        data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+      });
+
+      // Hopefulness past (bar)
+      charts.hopePast = new Chart(document.getElementById('chartHopePast'), {
+        type: 'bar',
+        data: { labels: HOPE_LEVELS.map(l => truncLabel(l, 18)), datasets: [{ data: [0,0,0,0,0], backgroundColor: HOPE_COLORS_PAST }] },
+        options: baseOpts({ scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { maxRotation: 45, font: { size: 10 } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true } }, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 13 } } } })
+      });
+
+      // Hopefulness today (bar)
+      charts.hopeToday = new Chart(document.getElementById('chartHopeToday'), {
+        type: 'bar',
+        data: { labels: HOPE_LEVELS.map(l => truncLabel(l, 18)), datasets: [{ data: [0,0,0,0,0], backgroundColor: HOPE_COLORS_TODAY }] },
+        options: baseOpts({ scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { maxRotation: 45, font: { size: 10 } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true } }, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 13 } } } })
+      });
+
+      // Trajectory (horizontal bar)
+      charts.trajectory = new Chart(document.getElementById('chartTrajectory'), {
+        type: 'bar',
+        data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+      });
+
+      // Hope sources (horizontal bar)
+      charts.hopeSources = new Chart(document.getElementById('chartHopeSources'), {
+        type: 'bar',
+        data: { labels: [], datasets: [{ data: [], backgroundColor: '#22c55e' }] },
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
       });
     }
 
     // =========================================================
-    //  BUILD FEELINGS CARDS
+    //  BUILD FEELINGS CARDS (static structure)
     // =========================================================
     function buildFeelingsCards() {
       const grid = document.getElementById('feelingsGrid');
       grid.innerHTML = '';
-      FEELING_PROMPTS.forEach(f => {
+      FEELING_CARDS.forEach((f, i) => {
+        const benchmarkHTML = f.benchmarkLabel
+          ? `<div class="benchmark">National avg: <span>${f.benchmarkPct}%</span></div>`
+          : `<div class="benchmark" style="visibility:hidden">&nbsp;</div>`;
         grid.innerHTML += `
-          <div class="feeling-card" id="feeling-${f.key}">
-            <div class="label">"I have felt ${f.label.toLowerCase()}..."</div>
-            <div class="percentage" style="color:${f.color}">—</div>
+          <div class="feeling-card" id="feeling-${i}">
+            <div class="label">${f.label}</div>
+            <div class="percentage" style="color:${f.color}">&mdash;</div>
             <div class="count"></div>
             <div class="bar-bg"><div class="bar-fill" style="background:${f.color};width:0%"></div></div>
+            ${benchmarkHTML}
           </div>`;
       });
     }
@@ -497,180 +781,175 @@
     function updateDashboard(rows) {
       if (!rows.length) return;
 
-      document.getElementById('responseCount').textContent = rows.length;
+      const total = rows.length;
+      document.getElementById('responseCount').textContent = total;
       document.getElementById('lastUpdated').textContent = 'Updated: ' + new Date().toLocaleTimeString();
 
-      // --- Timeline ---
-      const times = rows.map(r => r.timestamp).sort();
-      const cumulative = [];
-      const timeLabels = [];
-      times.forEach((t, i) => {
-        const d = new Date(t);
-        const label = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        timeLabels.push(label);
-        cumulative.push(i + 1);
-      });
-      // Show max 20 points
-      const step = Math.max(1, Math.floor(timeLabels.length / 20));
-      charts.timeline.data.labels = timeLabels.filter((_, i) => i % step === 0 || i === timeLabels.length - 1);
-      charts.timeline.data.datasets[0].data = cumulative.filter((_, i) => i % step === 0 || i === cumulative.length - 1);
-      charts.timeline.update();
+      // ── Overview KPIs ──
+      document.getElementById('kpiResponses').textContent = total;
+      const uniqueChurches = new Set(rows.map(r => (r[COL.CHURCH_NAME] || '').trim().toLowerCase()).filter(Boolean));
+      document.getElementById('kpiChurches').textContent = uniqueChurches.size;
+      const uniqueStates = new Set(rows.map(r => (r[COL.STATE] || '').trim()).filter(Boolean));
+      document.getElementById('kpiStates').textContent = uniqueStates.size;
 
-      // --- States ---
-      const stateCounts = countBy(rows, 'state');
-      const sortedStates = Object.entries(stateCounts).sort((a, b) => b[1] - a[1]);
+      // ── Church name feed ──
+      const churchNames = [...new Set(rows.map(r => (r[COL.CHURCH_NAME] || '').trim()).filter(Boolean))];
+      const tagsEl = document.getElementById('churchTags');
+      tagsEl.innerHTML = churchNames.map(n => `<span class="church-tag">${n}</span>`).join('');
+
+      // ── States bar chart ──
+      const stateCounts = countValues(rows, COL.STATE);
+      const sortedStates = sortedEntries(stateCounts);
       charts.states.data.labels = sortedStates.map(s => s[0]);
       charts.states.data.datasets[0].data = sortedStates.map(s => s[1]);
+      charts.states.data.datasets[0].backgroundColor = sortedStates.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]);
       charts.states.update();
 
-      charts.statesDetail.data.labels = sortedStates.map(s => s[0]);
-      charts.statesDetail.data.datasets[0].data = sortedStates.map(s => s[1]);
-      charts.statesDetail.update();
+      // ── Roles (checkbox — comma separated) ──
+      const roleCounts = countCheckboxValues(rows, COL.ROLE);
+      const sortedRoles = sortedEntries(roleCounts);
+      charts.roles.data.labels = sortedRoles.map(s => truncLabel(s[0], 35));
+      charts.roles.data.datasets[0].data = sortedRoles.map(s => s[1]);
+      charts.roles.data.datasets[0].backgroundColor = sortedRoles.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]);
+      charts.roles.update();
 
-      // --- Languages ---
-      const langBuckets = { '1': 0, '2': 0, '3': 0, '4+': 0 };
+      // ── Languages (doughnut) ──
+      const langOrder = ['1','2','3','4+'];
+      const langMap = {};
       rows.forEach(r => {
-        const n = parseInt(r.languages) || 1;
-        if (n >= 4) langBuckets['4+']++;
-        else langBuckets[String(n)]++;
+        let val = (r[COL.LANGUAGES] || '').trim();
+        if (!val) return;
+        // Normalize: if it starts with a digit >= 4, map to "4+"
+        if (val.startsWith('4') || parseInt(val) >= 4) val = '4+';
+        langMap[val] = (langMap[val] || 0) + 1;
       });
-      charts.languages.data.labels = Object.keys(langBuckets);
-      charts.languages.data.datasets[0].data = Object.values(langBuckets);
+      const langLabels = langOrder.filter(k => langMap[k]);
+      const langData = langLabels.map(k => langMap[k] || 0);
+      charts.languages.data.labels = langLabels.map(l => l + (l === '1' ? ' language' : ' languages'));
+      charts.languages.data.datasets[0].data = langData;
       charts.languages.update();
 
-      // --- Staff ---
-      const staffBuckets = { '1-2': 0, '3-5': 0, '6-10': 0, '11-20': 0, '20+': 0 };
-      rows.forEach(r => {
-        const n = parseInt(r.staffSize) || 1;
-        if (n <= 2) staffBuckets['1-2']++;
-        else if (n <= 5) staffBuckets['3-5']++;
-        else if (n <= 10) staffBuckets['6-10']++;
-        else if (n <= 20) staffBuckets['11-20']++;
-        else staffBuckets['20+']++;
-      });
-      charts.staff.data.labels = Object.keys(staffBuckets);
-      charts.staff.data.datasets[0].data = Object.values(staffBuckets);
-      charts.staff.update();
+      // ── THE GAP: Congregation size ──
+      const congSizeOrder = [
+        'Significantly smaller',
+        'Somewhat smaller',
+        'About the same',
+        'Somewhat larger',
+        'Significantly larger',
+        'We are a single-language church'
+      ];
+      updateOrderedHBar(charts.congSize, rows, COL.CONG_SIZE, congSizeOrder, '#3b82f6');
 
-      // --- Churches ---
-      const churchCounts = countBy(rows, 'churchName');
-      const sortedChurches = Object.entries(churchCounts).sort((a, b) => b[1] - a[1]).slice(0, 25);
-      charts.churches.data.labels = sortedChurches.map(c => c[0]);
-      charts.churches.data.datasets[0].data = sortedChurches.map(c => c[1]);
-      charts.churches.update();
+      // ── THE GAP: Staff proportion ──
+      const staffPropOrder = [
+        'No dedicated English ministry staff (volunteer-led)',
+        'Significantly fewer staff for English',
+        'Somewhat fewer staff for English',
+        'About the same',
+        'Somewhat more staff for English',
+        'Significantly more staff for English',
+        'Not applicable (single-language church)'
+      ];
+      updateOrderedHBar(charts.staffProp, rows, COL.STAFF_PROP, staffPropOrder, '#f59e0b');
 
-      // --- Feelings ---
-      const total = rows.length;
-      FEELING_PROMPTS.forEach((f, i) => {
-        const card = document.getElementById('feeling-' + f.key);
+      // ── Age groups (checkbox — comma separated) ──
+      const ageCounts = countCheckboxValues(rows, COL.AGE_GROUPS);
+      const sortedAge = sortedEntries(ageCounts);
+      charts.ageGroups.data.labels = sortedAge.map(s => truncLabel(s[0], 40));
+      charts.ageGroups.data.datasets[0].data = sortedAge.map(s => s[1]);
+      charts.ageGroups.data.datasets[0].backgroundColor = sortedAge.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]);
+      charts.ageGroups.update();
+
+      // ── Youth retention (horizontal bar) ──
+      const youthCounts = countValues(rows, COL.YOUTH_RETENTION);
+      const sortedYouth = sortedEntries(youthCounts);
+      charts.youthRetention.data.labels = sortedYouth.map(s => truncLabel(s[0], 45));
+      charts.youthRetention.data.datasets[0].data = sortedYouth.map(s => s[1]);
+      charts.youthRetention.data.datasets[0].backgroundColor = sortedYouth.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]);
+      charts.youthRetention.update();
+
+      // ── Feelings cards ──
+      FEELING_CARDS.forEach((f, i) => {
+        const card = document.getElementById('feeling-' + i);
         if (!card) return;
-        const yesCount = rows.filter(r => r.feelings && r.feelings[i]).length;
-        const pct = Math.round((yesCount / total) * 100);
-        card.querySelector('.percentage').textContent = pct + '%';
-        card.querySelector('.count').textContent = yesCount + ' of ' + total + ' respondents';
-        card.querySelector('.bar-fill').style.width = pct + '%';
+        const result = pctYes(rows, f.colIdx);
+        card.querySelector('.percentage').textContent = result.total > 0 ? result.pct + '%' : '\u2014';
+        card.querySelector('.count').textContent = result.yes + ' of ' + result.total + ' respondents';
+        card.querySelector('.bar-fill').style.width = result.pct + '%';
       });
+
+      // ── Hopefulness past ──
+      updateHopeChart(charts.hopePast, rows, COL.HOPE_PAST, HOPE_COLORS_PAST);
+
+      // ── Hopefulness today ──
+      updateHopeChart(charts.hopeToday, rows, COL.HOPE_TODAY, HOPE_COLORS_TODAY);
+
+      // ── Trajectory ──
+      const trajCounts = countValues(rows, COL.TRAJECTORY);
+      const sortedTraj = sortedEntries(trajCounts);
+      charts.trajectory.data.labels = sortedTraj.map(s => truncLabel(s[0], 50));
+      charts.trajectory.data.datasets[0].data = sortedTraj.map(s => s[1]);
+      charts.trajectory.data.datasets[0].backgroundColor = sortedTraj.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]);
+      charts.trajectory.update();
+
+      // ── Hope sources (checkbox — comma separated) ──
+      const hopeSrcCounts = countCheckboxValues(rows, COL.WHAT_GIVES_HOPE);
+      const sortedHopeSrc = sortedEntries(hopeSrcCounts);
+      charts.hopeSources.data.labels = sortedHopeSrc.map(s => truncLabel(s[0], 55));
+      charts.hopeSources.data.datasets[0].data = sortedHopeSrc.map(s => s[1]);
+      charts.hopeSources.update();
     }
 
-    function countBy(arr, key) {
-      const map = {};
-      arr.forEach(r => {
-        const val = (r[key] || 'Unknown').trim();
-        map[val] = (map[val] || 0) + 1;
+    function updateOrderedHBar(chart, rows, colIdx, order, color) {
+      const counts = countValues(rows, colIdx);
+      // Use the order but only show labels that appear in data (or show all for structural completeness)
+      const labels = order.filter(k => counts[k]);
+      // Also include any responses not in the predefined order
+      Object.keys(counts).forEach(k => {
+        if (!labels.includes(k)) labels.push(k);
       });
-      return map;
+      chart.data.labels = labels.map(l => truncLabel(l, 42));
+      chart.data.datasets[0].data = labels.map(k => counts[k] || 0);
+      chart.data.datasets[0].backgroundColor = color;
+      chart.update();
+    }
+
+    function updateHopeChart(chart, rows, colIdx, colors) {
+      const counts = countValues(rows, colIdx);
+      const data = HOPE_LEVELS.map(l => counts[l] || 0);
+      chart.data.datasets[0].data = data;
+      chart.data.datasets[0].backgroundColor = colors;
+      chart.update();
     }
 
     // =========================================================
-    //  CSV PARSING
+    //  GOOGLE SHEET — LIVE MODE
     // =========================================================
-    function parseCSV(text) {
-      const lines = text.split('\n').filter(l => l.trim());
-      if (lines.length < 2) return [];
+    function switchToLive() {
+      isLive = true;
+      document.getElementById('demoBanner').innerHTML = 'LIVE MODE — Connecting to Google Sheet...';
+      document.getElementById('statusText').textContent = 'Connecting...';
 
-      // Simple CSV parse (handles quoted fields)
-      function parseLine(line) {
-        const result = [];
-        let current = '';
-        let inQuotes = false;
-        for (let i = 0; i < line.length; i++) {
-          const ch = line[i];
-          if (ch === '"') { inQuotes = !inQuotes; }
-          else if (ch === ',' && !inQuotes) { result.push(current.trim()); current = ''; }
-          else { current += ch; }
-        }
-        result.push(current.trim());
-        return result;
-      }
-
-      const headers = parseLine(lines[0]);
-      const rows = [];
-
-      for (let i = 1; i < lines.length; i++) {
-        const cols = parseLine(lines[i]);
-        if (cols.length < 6) continue;
-
-        const feelings = [];
-        for (let j = 6; j < cols.length; j++) {
-          const val = cols[j].toLowerCase();
-          feelings.push(val === 'yes' || val === '1' || val === 'true' || parseInt(val) >= 4);
-        }
-
-        rows.push({
-          timestamp: cols[0],
-          churchName: cols[1],
-          city: cols[2],
-          state: cols[3],
-          languages: cols[4],
-          staffSize: cols[5],
-          feelings: feelings
-        });
-      }
-      return rows;
-    }
-
-    // =========================================================
-    //  GOOGLE SHEET CONNECTION
-    // =========================================================
-    let sheetCsvUrl = null;
-
-    function connectSheet() {
-      const url = document.getElementById('sheetUrl').value.trim();
-      if (!url) {
-        document.getElementById('connectStatus').textContent = 'Please enter a URL.';
-        return;
-      }
-
-      sheetCsvUrl = url;
-      document.getElementById('connectStatus').textContent = 'Connecting...';
-      document.getElementById('connectStatus').style.color = '#f59e0b';
-
-      fetchSheetData().then(success => {
+      fetchLiveData().then(success => {
         if (success) {
-          document.getElementById('connectStatus').textContent = '✓ Connected! Refreshing every 8 seconds.';
-          document.getElementById('connectStatus').style.color = '#22c55e';
-          document.getElementById('statusText').textContent = 'Live';
           document.getElementById('demoBanner').style.display = 'none';
-
+          document.getElementById('statusText').textContent = 'Live';
           if (refreshInterval) clearInterval(refreshInterval);
-          refreshInterval = setInterval(fetchSheetData, 8000);
-
-          // Switch to overview
-          document.querySelector('nav button[data-panel="overview"]').click();
+          refreshInterval = setInterval(fetchLiveData, 8000);
         } else {
-          document.getElementById('connectStatus').textContent = '✗ Could not fetch data. Check the URL and make sure the sheet is published.';
-          document.getElementById('connectStatus').style.color = '#f43f5e';
+          document.getElementById('demoBanner').innerHTML = 'Could not connect to Google Sheet. <button class="live-btn" onclick="switchToLive()">Retry</button>';
+          document.getElementById('statusText').textContent = 'Connection failed';
         }
       });
     }
 
-    async function fetchSheetData() {
+    async function fetchLiveData() {
       try {
-        const resp = await fetch(sheetCsvUrl + '&_t=' + Date.now());
+        const resp = await fetch(LIVE_CSV_URL + '&_t=' + Date.now());
         if (!resp.ok) return false;
         const text = await resp.text();
-        rawData = parseCSV(text);
-        updateDashboard(rawData);
+        rawRows = parseCSV(text);
+        updateDashboard(rawRows);
         return true;
       } catch (e) {
         console.error('Fetch error:', e);
@@ -681,8 +960,7 @@
     // =========================================================
     //  DEMO DATA
     // =========================================================
-    function loadDemoData() {
-      // Real Chinese heritage churches across the USA
+    function generateDemoData() {
       const churchData = [
         ['Chinese Christian Herald Crusades Church', 'New York City', 'NY'],
         ['Church of Grace to Fujianese', 'New York City', 'NY'],
@@ -690,98 +968,226 @@
         ['Chinese Evangelical Church of New York', 'New York City', 'NY'],
         ['Oversea Chinese Mission Church', 'New York City', 'NY'],
         ['First Chinese Baptist Church', 'New York City', 'NY'],
-        ['Chinese Community Church of New York', 'New York City', 'NY'],
         ['Boston Chinese Evangelical Church', 'Boston', 'MA'],
         ['Chinese Bible Church of Greater Boston', 'Lexington', 'MA'],
         ['Chinese Gospel Church of Massachusetts', 'Acton', 'MA'],
         ['Chinese Christian Church of New England', 'Milford', 'MA'],
-        ['Chinese Church in Christ of New England', 'Worcester', 'MA'],
         ['Chinese Christian Union Church', 'Chicago', 'IL'],
         ['Chinese Bible Church of Chicago', 'Streamwood', 'IL'],
         ['Chinese Gospel Church of Chicago', 'Chicago', 'IL'],
-        ['First Chinese Baptist Church of Chicago', 'Chicago', 'IL'],
         ['Chinese Christian Church of Greater Washington D.C.', 'Chantilly', 'VA'],
         ['Chinese Bible Church of Maryland', 'Rockville', 'MD'],
         ['Chinese Community Church of Washington D.C.', 'Washington', 'DC'],
         ['Gaithersburg Chinese Alliance Church', 'Gaithersburg', 'MD'],
-        ['Chinese Church of Christ of Northern Virginia', 'Fairfax', 'VA'],
         ['Chinese Evangelical Free Church of North Jersey', 'Parsippany', 'NJ'],
-        ['Chinese Community Church of South Jersey', 'Cherry Hill', 'NJ'],
         ['Chinese Christian Church of Princeton', 'Princeton', 'NJ'],
         ['Chinese Christian Church of San Francisco', 'San Francisco', 'CA'],
         ['San Francisco Chinese Baptist Church', 'San Francisco', 'CA'],
         ['First Chinese Baptist Church of Los Angeles', 'Los Angeles', 'CA'],
         ['Chinese Evangelical Free Church of Los Angeles', 'Monterey Park', 'CA'],
         ['Chinese Bible Church of San Diego', 'San Diego', 'CA'],
-        ['Canaan Taiwanese Christian Church', 'San Jose', 'CA'],
         ['Cupertino Chinese Alliance Church', 'Cupertino', 'CA'],
         ['Chinese Church in Christ of Mountain View', 'Mountain View', 'CA'],
         ['San Gabriel Valley Chinese Christian Church', 'West Covina', 'CA'],
         ['Ambassadors for Christ Church', 'San Jose', 'CA'],
         ['Chinese Evangelical Church of Seattle', 'Seattle', 'WA'],
-        ['Chinese Southern Baptist Church of Seattle', 'Seattle', 'WA'],
         ['Eastside Chinese Alliance Church', 'Bellevue', 'WA'],
         ['Houston Chinese Church', 'Houston', 'TX'],
         ['Chinese Baptist Church of Austin', 'Austin', 'TX'],
         ['Dallas Chinese Bible Church', 'Richardson', 'TX'],
-        ['Chinese Christian Church of Dallas', 'Plano', 'TX'],
         ['Atlanta Chinese Christian Church', 'Atlanta', 'GA'],
         ['Chinese Church of Atlanta', 'Duluth', 'GA'],
         ['First Chinese Baptist Church of Philadelphia', 'Philadelphia', 'PA'],
         ['Chinese Gospel Church of Philadelphia', 'Cheltenham', 'PA'],
+        ['Chinese Community Church of South Jersey', 'Cherry Hill', 'NJ'],
+        ['Canaan Taiwanese Christian Church', 'San Jose', 'CA'],
+        ['First Chinese Baptist Church of Chicago', 'Chicago', 'IL'],
       ];
 
-      const rows = [];
-      const now = new Date();
-      const count = 50;
+      const roles = [
+        'Senior / Lead Pastor',
+        'English Ministry Pastor',
+        'Associate Pastor/Minister',
+        'Youth Pastor/Minister',
+        'Young Adult Pastor/Minister',
+        'Lay Leader / Elder / Deacon',
+        'Staff (non-pastoral)'
+      ];
+      const roleWeights = [0.12, 0.25, 0.15, 0.12, 0.08, 0.18, 0.10];
 
-      // Shuffle and pick churches, allowing some duplicates (multiple attendees from same church)
-      for (let i = 0; i < count; i++) {
-        // Weight toward some churches having multiple attendees
-        const ci = Math.floor(Math.random() * churchData.length);
-        const church = churchData[ci];
-        const time = new Date(now.getTime() - (count - i) * 35000);
+      const congSizeOptions = [
+        'Significantly smaller',
+        'Somewhat smaller',
+        'About the same',
+        'Somewhat larger',
+        'Significantly larger',
+        'We are a single-language church'
+      ];
+      const congSizeWeights = [0.22, 0.28, 0.20, 0.12, 0.08, 0.10];
 
-        // Realistic language counts: most churches 2-3, some 1, a few 4
-        const langRoll = Math.random();
-        const languages = langRoll < 0.12 ? '1' : langRoll < 0.55 ? '2' : langRoll < 0.88 ? '3' : '4';
+      const staffPropOptions = [
+        'No dedicated English ministry staff (volunteer-led)',
+        'Significantly fewer staff for English',
+        'Somewhat fewer staff for English',
+        'About the same',
+        'Somewhat more staff for English',
+        'Significantly more staff for English',
+        'Not applicable (single-language church)'
+      ];
+      const staffPropWeights = [0.15, 0.30, 0.22, 0.15, 0.05, 0.03, 0.10];
 
-        // Realistic staff sizes for Chinese heritage churches
-        const staffRoll = Math.random();
-        const staffSize = staffRoll < 0.2 ? String(1 + Math.floor(Math.random() * 2))    // 1-2
-                        : staffRoll < 0.5 ? String(3 + Math.floor(Math.random() * 3))     // 3-5
-                        : staffRoll < 0.8 ? String(6 + Math.floor(Math.random() * 5))     // 6-10
-                        : String(11 + Math.floor(Math.random() * 10));                      // 11-20
+      const ageGroupOptions = [
+        'Children (0-12)',
+        'Teens (13-17)',
+        'College-age (18-22)',
+        'Young adults (23-35)',
+        'Young families',
+        'Middle-aged adults (36-55)',
+        'Older adults (55+)'
+      ];
 
-        // Feelings with realistic distributions for pastors/church leaders
-        const feelings = [
-          Math.random() < 0.55,  // lonely — common among pastors
-          Math.random() < 0.30,  // like quitting — less common but real
-          Math.random() < 0.65,  // affirmed in calling — majority
-          Math.random() < 0.60,  // overwhelmed — quite common
-          Math.random() < 0.50,  // supported by community — about half
-          Math.random() < 0.70,  // hopeful about the future — most
-        ];
+      const youthRetentionOptions = [
+        'Most continue at a Chinese heritage church',
+        'Most attend a non-Chinese heritage church',
+        'Most step away from church altogether',
+        "It's a mix \u2014 no clear pattern",
+        "I don't know / we don't track this"
+      ];
+      const youthRetentionWeights = [0.12, 0.25, 0.15, 0.30, 0.18];
 
-        rows.push({
-          timestamp: time.toISOString(),
-          churchName: church[0],
-          city: church[1],
-          state: church[2],
-          languages: languages,
-          staffSize: staffSize,
-          feelings: feelings
-        });
+      const trajectoryOptions = [
+        'Remaining a Chinese heritage church with renewed vision',
+        'Becoming a broader Asian American or pan-Asian church',
+        'Becoming a multiethnic church (moving beyond Asian identity)',
+        'Merging with or being absorbed into another church',
+        'Gradual decline without a clear next chapter',
+        "I genuinely don't know"
+      ];
+      const trajectoryWeights = [0.25, 0.18, 0.15, 0.05, 0.12, 0.25];
+
+      const hopeSourceOptions = [
+        'Growing connections between Chinese heritage church leaders and pastors',
+        'Next-generation leaders stepping into roles',
+        'New models of ministry emerging within Chinese heritage churches',
+        'Gatherings like this one (SOLA, CHCC events)',
+        'Seeing other churches navigate similar transitions well',
+        'A renewed sense of calling in my own ministry',
+        'A growing confidence that Chinese heritage churches have a unique and needed place in God\'s kingdom',
+        'Embracing our calling to the Chinese heritage church while remaining open to where God leads'
+      ];
+
+      function weightedRandom(options, weights) {
+        const r = Math.random();
+        let sum = 0;
+        for (let i = 0; i < weights.length; i++) {
+          sum += weights[i];
+          if (r < sum) return options[i];
+        }
+        return options[options.length - 1];
       }
 
-      rawData = rows;
-      updateDashboard(rows);
+      function pickMultiple(options, minPick, maxPick) {
+        const count = minPick + Math.floor(Math.random() * (maxPick - minPick + 1));
+        const shuffled = [...options].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, count).join(', ');
+      }
+
+      const count = 65;
+      const rows = [];
+      const now = new Date();
+
+      for (let i = 0; i < count; i++) {
+        const ci = Math.floor(Math.random() * churchData.length);
+        const church = churchData[ci];
+        const time = new Date(now.getTime() - (count - i) * 30000);
+
+        // Role (sometimes multiple)
+        let role;
+        if (Math.random() < 0.15) {
+          // Two roles
+          const r1 = weightedRandom(roles, roleWeights);
+          let r2 = weightedRandom(roles, roleWeights);
+          while (r2 === r1) r2 = weightedRandom(roles, roleWeights);
+          role = r1 + ', ' + r2;
+        } else {
+          role = weightedRandom(roles, roleWeights);
+        }
+
+        // Languages
+        const langRoll = Math.random();
+        const languages = langRoll < 0.10 ? '1' : langRoll < 0.45 ? '2' : langRoll < 0.82 ? '3' : '4+';
+
+        // Congregation size
+        const congSize = weightedRandom(congSizeOptions, congSizeWeights);
+
+        // Staff proportion (weighted toward fewer staff for English — the gap)
+        const staffProp = weightedRandom(staffPropOptions, staffPropWeights);
+
+        // Age groups (checkbox — 2-4 selections)
+        const ageGroups = pickMultiple(ageGroupOptions, 1, 4);
+
+        // Youth retention
+        const youthRetention = weightedRandom(youthRetentionOptions, youthRetentionWeights);
+
+        // Feelings
+        const lonely = Math.random() < 0.52 ? 'Yes' : 'No';
+        const likeQuitting = Math.random() < 0.30 ? 'Yes' : 'No';
+        const overwhelmed = Math.random() < 0.62 ? 'Yes' : 'No';
+        const affirmed = Math.random() < 0.75 ? 'Yes' : 'No';
+        const cantSpeakOpenly = Math.random() < 0.35 ? 'Yes' : 'No';
+
+        // Hopefulness past (skew toward lower)
+        const hopePastWeights = [0.10, 0.25, 0.35, 0.22, 0.08];
+        const hopePast = weightedRandom(HOPE_LEVELS, hopePastWeights);
+
+        // Hopefulness today (skew toward higher — the shift)
+        const hopeTodayWeights = [0.04, 0.12, 0.28, 0.35, 0.21];
+        const hopeToday = weightedRandom(HOPE_LEVELS, hopeTodayWeights);
+
+        // Trajectory
+        const trajectory = weightedRandom(trajectoryOptions, trajectoryWeights);
+
+        // What gives hope (checkbox — 2-4 selections)
+        const whatGivesHope = pickMultiple(hopeSourceOptions, 2, 4);
+
+        // Build row array matching COL indices
+        const row = [];
+        row[COL.TIMESTAMP] = time.toISOString();
+        row[COL.CHURCH_NAME] = church[0];
+        row[COL.CITY] = church[1];
+        row[COL.STATE] = church[2];
+        row[COL.ROLE] = role;
+        row[COL.LANGUAGES] = languages;
+        row[COL.CONG_SIZE] = congSize;
+        row[COL.STAFF_PROP] = staffProp;
+        row[COL.AGE_GROUPS] = ageGroups;
+        row[COL.YOUTH_RETENTION] = youthRetention;
+        row[COL.LONELY] = lonely;
+        row[COL.LIKE_QUITTING] = likeQuitting;
+        row[COL.OVERWHELMED] = overwhelmed;
+        row[COL.AFFIRMED] = affirmed;
+        row[COL.CANT_SPEAK_OPENLY] = cantSpeakOpenly;
+        row[COL.HOPE_PAST] = hopePast;
+        row[COL.HOPE_TODAY] = hopeToday;
+        row[COL.TRAJECTORY] = trajectory;
+        row[COL.WHAT_GIVES_HOPE] = whatGivesHope;
+
+        rows.push(row);
+      }
+
+      return rows;
+    }
+
+    function loadDemoData() {
+      rawRows = generateDemoData();
+      updateDashboard(rawRows);
       document.getElementById('statusText').textContent = 'Demo mode';
-      document.getElementById('demoBanner').innerHTML = '⚡ DEMO MODE — Showing 50 sample responses from real Chinese heritage churches. Go to Setup to connect your Google Sheet. ⚡';
+      document.getElementById('demoBanner').innerHTML =
+        'DEMO MODE — Showing 65 sample responses from real Chinese heritage churches <button class="live-btn" onclick="switchToLive()">Switch to Live</button>';
     }
 
     // =========================================================
-    //  INIT — auto-load demo data so dashboard is populated
+    //  INIT
     // =========================================================
     initCharts();
     buildFeelingsCards();
