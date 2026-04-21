@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHCC Luncheon — Slides</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --accent: #d4736e;
+      --accent-dim: rgba(212, 115, 110, 0.15);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --card-border: rgba(255,255,255,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    /* ── Slide Container ── */
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateX(40px);
+      padding: 3vh 4vw;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .slide.exit-left {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-40px);
+    }
+
+    /* ── Navigation Dots ── */
+    .nav-dots {
+      position: fixed;
+      bottom: 2.5vh;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 100;
+    }
+
+    .nav-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(212, 115, 110, 0.5);
+    }
+
+    .nav-dot:hover:not(.active) {
+      background: rgba(255,255,255,0.35);
+    }
+
+    /* ── Keyboard Hint ── */
+    .hint {
+      position: fixed;
+      bottom: 1vh;
+      right: 2vw;
+      font-size: 0.7rem;
+      color: var(--muted);
+      opacity: 0.5;
+      z-index: 100;
+    }
+
+    /* ── Slide 1: Welcome ── */
+    .welcome-badge {
+      display: inline-block;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.5em 1.5em;
+      border-radius: 999px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2vh;
+      border: 1px solid rgba(212, 115, 110, 0.25);
+    }
+
+    .welcome-title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.15;
+      margin-bottom: 1vh;
+    }
+
+    .welcome-title .accent {
+      color: var(--accent);
+    }
+
+    .welcome-subtitle {
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 5vh;
+      font-weight: 400;
+    }
+
+    .divider-line {
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 4vh;
+    }
+
+    .panelists {
+      display: flex;
+      gap: 3vw;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 90vw;
+    }
+
+    .panelist-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2.5vh 2.5vw;
+      text-align: center;
+      min-width: 240px;
+      max-width: 320px;
+      flex: 1;
+      transition: transform 0.2s;
+    }
+
+    .panelist-card:hover { transform: translateY(-2px); }
+
+    .panelist-name {
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 700;
+      margin-bottom: 0.5vh;
+    }
+
+    .panelist-role {
+      font-size: clamp(0.75rem, 1.2vw, 1rem);
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5vh;
+    }
+
+    .panelist-detail {
+      font-size: clamp(0.7rem, 1vw, 0.9rem);
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── QR Slides (2, 4, 5) ── */
+    .qr-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5vh;
+      height: 100%;
+    }
+
+    .qr-slide-title {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .qr-slide-title .accent { color: var(--accent); }
+
+    .qr-description {
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .qr-box {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 60px rgba(212, 115, 110, 0.15), 0 0 0 1px rgba(255,255,255,0.1);
+    }
+
+    .qr-box canvas {
+      display: block;
+    }
+
+    .qr-url {
+      font-size: clamp(0.8rem, 1.3vw, 1.1rem);
+      color: var(--muted);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      background: var(--card);
+      padding: 0.6em 1.4em;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+    }
+
+    /* ── Slide 3: Dashboard ── */
+    .dashboard-slide {
+      padding: 0 !important;
+    }
+
+    .dashboard-header {
+      width: 100%;
+      text-align: center;
+      padding: 1.2vh 0 0.8vh;
+      background: linear-gradient(180deg, var(--bg) 0%, transparent 100%);
+      position: relative;
+      z-index: 2;
+    }
+
+    .dashboard-header h2 {
+      font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+      font-weight: 700;
+    }
+
+    .dashboard-header h2 .accent { color: var(--accent); }
+
+    .dashboard-frame-wrap {
+      flex: 1;
+      width: 100%;
+      position: relative;
+    }
+
+    .dashboard-frame-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── Slide 5: Closing ── */
+    .closing-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2vh;
+    }
+
+    .closing-title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .closing-message {
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      color: var(--muted);
+      text-align: center;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    .closing-site {
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: 1vh;
+    }
+
+    .closing-bottom {
+      display: flex;
+      align-items: center;
+      gap: 3vw;
+      margin-top: 1vh;
+    }
+
+    .closing-bottom-text {
+      text-align: center;
+    }
+
+    .closing-bottom-text p {
+      font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+      color: var(--muted);
+    }
+
+    .closing-bottom-text .site-link {
+      font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: 0.5vh;
+    }
+
+    /* ── Logo ── */
+    .chcc-logo {
+      display: block;
+      object-fit: contain;
+    }
+
+    .chcc-logo.large {
+      height: clamp(140px, 22vh, 260px);
+      margin-bottom: 2.5vh;
+    }
+
+    .chcc-logo.small {
+      height: clamp(120px, 18vh, 200px);
+      margin-bottom: 2vh;
+    }
+
+    /* ── Decorative Elements ── */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .glow-orb.amber {
+      background: var(--accent);
+      width: 500px; height: 500px;
+    }
+
+    .glow-orb.blue {
+      background: #3b82f6;
+      width: 400px; height: 400px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ═══════════ SLIDE 1: Welcome ═══════════ -->
+  <div class="slide active" data-slide="0">
+    <div class="glow-orb amber" style="top: -100px; right: -100px;"></div>
+    <div class="glow-orb blue" style="bottom: -80px; left: -80px;"></div>
+
+    <img src="CHCC%20Logo%20E%20v3.png" alt="CHCC Logo" class="chcc-logo large">
+    <div class="welcome-badge">SOLA Network &middot; AALC 2026</div>
+    <h1 class="welcome-title">Welcome to the <span class="accent">CHCC</span> Luncheon</h1>
+    <div class="divider-line"></div>
+
+    <div class="panelists">
+      <div class="panelist-card">
+        <div class="panelist-name">Enoch Liao</div>
+        <div class="panelist-role">Facilitator</div>
+        <div class="panelist-detail">Lead English Pastor, Boston Chinese Evangelical Church<br>CHCC Executive Team</div>
+      </div>
+      <div class="panelist-card">
+        <div class="panelist-name">Pastor Jason Tarn</div>
+        <div class="panelist-role">Panelist</div>
+        <div class="panelist-detail">Co-Senior Pastor, Houston Chinese Church<br>CHCC Executive Team &middot; AALC Plenary Speaker</div>
+      </div>
+      <div class="panelist-card">
+        <div class="panelist-name">Pastor Dave Hsu</div>
+        <div class="panelist-role">Panelist</div>
+        <div class="panelist-detail">Senior Pastor, West Houston Chinese Church<br>AALC Plenary Speaker</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ SLIDE 2: Survey QR ═══════════ -->
+  <div class="slide" data-slide="1">
+    <div class="glow-orb amber" style="top: 50%; left: -150px; transform: translateY(-50%);"></div>
+    <div class="qr-layout">
+      <h2 class="qr-slide-title">Take the <span class="accent">Survey</span></h2>
+      <p class="qr-description">Help us understand the landscape of Chinese heritage churches. Scan the QR code below to share your perspective.</p>
+      <div class="qr-box" id="qr-survey"></div>
+      <div class="qr-url">docs.google.com/forms/&hellip;</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ SLIDE 3: Live Dashboard ═══════════ -->
+  <div class="slide dashboard-slide" data-slide="2">
+    <div class="dashboard-header">
+      <h2><span class="accent">Live</span> Survey Results</h2>
+    </div>
+    <div class="dashboard-frame-wrap">
+      <iframe
+        id="dashboard-iframe"
+        src="about:blank"
+        data-src="https://iamshamgar.github.io/sola-luncheon-dashboard/public.html"
+        loading="lazy"
+        allow="fullscreen"
+      ></iframe>
+    </div>
+  </div>
+
+  <!-- ═══════════ SLIDE 4: Results QR ═══════════ -->
+  <div class="slide" data-slide="3">
+    <div class="glow-orb amber" style="bottom: -120px; right: -120px;"></div>
+    <div class="qr-layout">
+      <h2 class="qr-slide-title">View <span class="accent">Results</span> on Your Device</h2>
+      <p class="qr-description">Scan to explore the full dashboard with interactive charts on your phone or tablet.</p>
+      <div class="qr-box" id="qr-dashboard"></div>
+      <div class="qr-url">iamshamgar.github.io/sola-luncheon-dashboard/public.html</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ SLIDE 5: Closing ═══════════ -->
+  <div class="slide" data-slide="4">
+    <div class="glow-orb amber" style="top: -120px; left: 50%; transform: translateX(-50%);"></div>
+    <div class="glow-orb blue" style="bottom: -100px; right: -100px;"></div>
+    <div class="closing-content">
+      <img src="CHCC%20Logo%20E%20v3.png" alt="CHCC Logo" class="chcc-logo small">
+      <h1 class="closing-title">Thank <span class="accent">You</span></h1>
+      <p class="closing-message">
+        Thank you for joining us today and sharing your voice for Chinese heritage churches.
+        Stay connected and learn more about what CHCC is doing.
+      </p>
+      <div class="divider-line"></div>
+      <div class="closing-bottom">
+        <div class="qr-box" id="qr-website" style="padding: 14px;"></div>
+        <div class="closing-bottom-text">
+          <p>Visit us online</p>
+          <div class="site-link" style="color: var(--accent); font-size: clamp(1.1rem, 1.6vw, 1.4rem); font-weight: 700; margin-top: 0.5vh;">chineseheritagechurch.com</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Nav Dots -->
+<div class="nav-dots" id="navDots"></div>
+<div class="hint">&#8592; &#8594; to navigate &middot; F for fullscreen</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Config ── */
+  const URLS = {
+    survey: 'https://docs.google.com/forms/d/e/1FAIpQLSe-7v0YCtTbB5e6UXky1x7k4H3QVU_gEDBLfHCCxsR8u9bJIg/viewform?usp=header',
+    dashboard: 'https://iamshamgar.github.io/sola-luncheon-dashboard/public.html',
+    website: 'https://chineseheritagechurch.com/'
+  };
+
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  let current = 0;
+  let transitioning = false;
+
+  /* ── Build Nav Dots ── */
+  const dotsContainer = document.getElementById('navDots');
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  function updateDots() {
+    dotsContainer.querySelectorAll('.nav-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  /* ── Navigation ── */
+  function goTo(index) {
+    if (transitioning || index === current || index < 0 || index >= totalSlides) return;
+    transitioning = true;
+
+    const dir = index > current ? 1 : -1;
+    const prev = slides[current];
+    const next = slides[index];
+
+    // Set starting position for incoming slide
+    next.style.transition = 'none';
+    next.style.transform = `translateX(${dir * 40}px)`;
+    next.style.opacity = '0';
+    next.style.visibility = 'visible';
+
+    // Force reflow
+    void next.offsetWidth;
+
+    // Animate
+    next.style.transition = '';
+    prev.classList.remove('active');
+    prev.style.transform = `translateX(${-dir * 40}px)`;
+    prev.style.opacity = '0';
+
+    next.classList.add('active');
+    next.style.transform = 'translateX(0)';
+    next.style.opacity = '1';
+
+    current = index;
+    updateDots();
+
+    // Load dashboard iframe on first visit to slide 3
+    if (current === 2) {
+      const iframe = document.getElementById('dashboard-iframe');
+      if (iframe.src === 'about:blank') {
+        iframe.src = iframe.dataset.src;
+      }
+    }
+
+    setTimeout(() => {
+      prev.style.visibility = 'hidden';
+      transitioning = false;
+    }, 520);
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  /* ── Keyboard ── */
+  document.addEventListener('keydown', (e) => {
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+      case ' ':
+        e.preventDefault();
+        next();
+        break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        e.preventDefault();
+        prev();
+        break;
+      case 'f':
+      case 'F':
+        if (!e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(() => {});
+          } else {
+            document.exitFullscreen();
+          }
+        }
+        break;
+      case 'Home':
+        e.preventDefault();
+        goTo(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        goTo(totalSlides - 1);
+        break;
+    }
+  });
+
+  /* ── Click Navigation ── */
+  document.addEventListener('click', (e) => {
+    // Don't navigate when clicking dots, links, or iframe area
+    if (e.target.closest('.nav-dots') || e.target.closest('a') || e.target.closest('iframe') || e.target.closest('.dashboard-frame-wrap')) return;
+    const x = e.clientX / window.innerWidth;
+    if (x > 0.65) next();
+    else if (x < 0.35) prev();
+  });
+
+  /* ── QR Code Generation (qrcodejs library) ── */
+  function generateQR(elementId, url, size) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    new QRCode(el, {
+      text: url,
+      width: size,
+      height: size,
+      colorDark: '#0f172a',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  }
+
+  function initQR() {
+    if (typeof QRCode === 'undefined') {
+      setTimeout(initQR, 100);
+      return;
+    }
+    generateQR('qr-survey', URLS.survey, 360);
+    generateQR('qr-dashboard', URLS.dashboard, 360);
+    generateQR('qr-website', URLS.website, 220);
+  }
+
+  initQR();
+
+})();
+</script>
+
+</body>
+</html>
