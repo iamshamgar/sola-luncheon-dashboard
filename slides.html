@@ -354,6 +354,139 @@
       background: #3b82f6;
       width: 400px; height: 400px;
     }
+
+    /* ── Mobile Responsive ── */
+    @media (max-width: 768px) {
+      html, body {
+        overflow: hidden;
+      }
+
+      .slide {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+        padding: 4vh 5vw 10vh;
+      }
+
+      .chcc-logo.large {
+        height: clamp(90px, 18vh, 150px);
+        margin-bottom: 1.5vh;
+      }
+
+      .chcc-logo.small {
+        height: clamp(70px, 14vh, 120px);
+        margin-bottom: 1vh;
+      }
+
+      .welcome-badge {
+        font-size: 0.8rem;
+        padding: 0.4em 1.2em;
+        margin-bottom: 1.5vh;
+      }
+
+      .welcome-title {
+        font-size: clamp(1.6rem, 6vw, 2.5rem);
+        margin-bottom: 1vh;
+      }
+
+      .divider-line {
+        margin-bottom: 2.5vh;
+      }
+
+      .panelists {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5vh;
+        max-width: 100%;
+      }
+
+      .panelist-card {
+        min-width: unset;
+        max-width: 100%;
+        width: 100%;
+        padding: 2vh 4vw;
+        border-radius: 12px;
+      }
+
+      .panelist-name {
+        font-size: 1.1rem;
+      }
+
+      .panelist-role {
+        font-size: 0.85rem;
+      }
+
+      .panelist-detail {
+        font-size: 0.8rem;
+      }
+
+      .qr-layout {
+        justify-content: flex-start;
+        padding-top: 2vh;
+        height: auto;
+      }
+
+      .qr-slide-title {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+      }
+
+      .qr-description {
+        font-size: 0.95rem;
+        padding: 0 2vw;
+      }
+
+      .qr-box {
+        padding: 12px;
+        border-radius: 14px;
+      }
+
+      .qr-url {
+        font-size: 0.75rem;
+        word-break: break-all;
+        text-align: center;
+        padding: 0.5em 1em;
+      }
+
+      .closing-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
+
+      .closing-message {
+        font-size: 0.95rem;
+        padding: 0 2vw;
+      }
+
+      .closing-bottom {
+        flex-direction: column;
+        gap: 2vh;
+      }
+
+      .closing-bottom-text .site-link,
+      .closing-bottom-text div[style] {
+        font-size: 1.1rem !important;
+      }
+
+      .nav-dots {
+        bottom: 1.5vh;
+      }
+
+      .nav-dot {
+        width: 10px;
+        height: 10px;
+      }
+
+      .hint {
+        display: none;
+      }
+
+      .dashboard-slide {
+        padding: 0 !important;
+      }
+
+      .dashboard-header {
+        padding: 1.5vh 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -579,6 +712,25 @@
     else if (x < 0.35) prev();
   });
 
+  /* ── Touch / Swipe Navigation ── */
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    const dy = e.changedTouches[0].screenY - touchStartY;
+    // Only navigate on horizontal swipes (not vertical scrolling)
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) next();
+      else prev();
+    }
+  }, { passive: true });
+
   /* ── QR Code Generation (qrcodejs library) ── */
   function generateQR(elementId, url, size) {
     const el = document.getElementById(elementId);
@@ -598,9 +750,12 @@
       setTimeout(initQR, 100);
       return;
     }
-    generateQR('qr-survey', URLS.survey, 360);
-    generateQR('qr-dashboard', URLS.dashboard, 360);
-    generateQR('qr-website', URLS.website, 220);
+    const isMobile = window.innerWidth <= 768;
+    const qrLarge = isMobile ? 220 : 360;
+    const qrSmall = isMobile ? 160 : 220;
+    generateQR('qr-survey', URLS.survey, qrLarge);
+    generateQR('qr-dashboard', URLS.dashboard, qrLarge);
+    generateQR('qr-website', URLS.website, qrSmall);
   }
 
   initQR();
