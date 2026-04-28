@@ -37,9 +37,9 @@
       background: var(--accent);
       color: var(--bg);
       text-align: center;
-      padding: 0.5rem;
+      padding: 0.65rem 1rem;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 1.05rem;
       cursor: pointer;
       display: flex;
       justify-content: center;
@@ -51,9 +51,9 @@
       background: var(--bg);
       color: var(--accent);
       border: none;
-      padding: 0.3rem 1rem;
+      padding: 0.4rem 1.1rem;
       border-radius: 9999px;
-      font-size: 0.8rem;
+      font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
     }
@@ -66,14 +66,15 @@
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     header h1 {
-      font-size: 2rem;
+      font-size: 2.6rem;
       font-weight: 700;
       color: var(--accent);
+      letter-spacing: -0.01em;
     }
     header p {
       color: var(--muted);
-      margin-top: 0.25rem;
-      font-size: 0.95rem;
+      margin-top: 0.35rem;
+      font-size: 1.25rem;
     }
 
     /* ── Status Bar ── */
@@ -89,8 +90,8 @@
     .status-item {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
+      gap: 0.5rem;
+      font-size: 1.1rem;
       color: var(--muted);
     }
     .status-item .dot {
@@ -104,7 +105,7 @@
       50% { opacity: 0.4; }
     }
     .response-count {
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-weight: 800;
       color: var(--accent);
     }
@@ -121,22 +122,23 @@
       background: var(--card);
       color: var(--muted);
       border: 1px solid rgba(255,255,255,0.1);
-      padding: 0.5rem 1.25rem;
+      padding: 0.65rem 1.5rem;
       border-radius: 9999px;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 1.15rem;
+      font-weight: 500;
       transition: all 0.2s;
     }
     nav button:hover { border-color: var(--accent); color: var(--text); }
     nav button.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
 
     /* ── Panels ── */
-    .panel { display: none; padding: 1.5rem; max-width: 1300px; margin: 0 auto; }
+    .panel { display: none; padding: 1.5rem; max-width: 1500px; margin: 0 auto; }
     .panel.active { display: block; }
 
     .chart-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
       gap: 1.5rem;
     }
     .chart-grid.full-width {
@@ -146,82 +148,85 @@
     .chart-card {
       background: var(--card);
       border-radius: 1rem;
-      padding: 1.5rem;
+      padding: 1.75rem 1.75rem 1.5rem;
       border: 1px solid var(--card-border);
     }
     .chart-card h3 {
-      font-size: 1rem;
-      color: var(--muted);
+      font-size: 1.45rem;
+      color: var(--text);
       margin-bottom: 1rem;
-      font-weight: 500;
+      font-weight: 600;
+      letter-spacing: -0.005em;
     }
     .chart-card .chart-subtitle {
-      font-size: 0.8rem;
-      color: #64748b;
-      margin-top: -0.75rem;
-      margin-bottom: 1rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-top: -0.5rem;
+      margin-bottom: 1.25rem;
       font-style: italic;
     }
     .chart-container {
       position: relative;
       width: 100%;
-      height: 320px;
+      height: 380px;
     }
-    .chart-container.tall { height: 420px; }
-    .chart-container.short { height: 260px; }
+    .chart-container.tall { height: 500px; }
+    .chart-container.short { height: 300px; }
 
     /* ── Overview KPI Row ── */
     .kpi-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
     }
     .kpi-card {
       background: var(--card);
       border-radius: 1rem;
-      padding: 1.25rem 1.5rem;
+      padding: 1.75rem 1.5rem;
       border: 1px solid var(--card-border);
       text-align: center;
     }
     .kpi-card .kpi-value {
-      font-size: 2.75rem;
+      font-size: 4.5rem;
       font-weight: 800;
       color: var(--accent);
-      line-height: 1.1;
+      line-height: 1;
+      letter-spacing: -0.02em;
     }
     .kpi-card .kpi-label {
-      font-size: 0.85rem;
+      font-size: 1.15rem;
       color: var(--muted);
-      margin-top: 0.25rem;
+      margin-top: 0.5rem;
+      font-weight: 500;
     }
 
     /* ── Church Name Feed ── */
     .church-feed {
       background: var(--card);
       border-radius: 1rem;
-      padding: 1.5rem;
+      padding: 1.75rem;
       border: 1px solid var(--card-border);
-      max-height: 400px;
+      max-height: 500px;
       overflow-y: auto;
     }
     .church-feed h3 {
-      font-size: 1rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      font-weight: 500;
+      font-size: 1.45rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      font-weight: 600;
     }
     .church-feed .church-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.55rem;
     }
     .church-feed .church-tag {
       background: rgba(245,158,11,0.12);
       color: var(--accent);
-      padding: 0.35rem 0.75rem;
+      padding: 0.5rem 0.95rem;
       border-radius: 9999px;
-      font-size: 0.82rem;
+      font-size: 1.05rem;
       font-weight: 500;
       border: 1px solid rgba(245,158,11,0.2);
     }
@@ -229,55 +234,58 @@
     /* ── Feelings Cards ── */
     .feelings-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.25rem;
     }
     .feeling-card {
       background: var(--card);
       border-radius: 1rem;
-      padding: 1.5rem;
+      padding: 1.75rem 1.5rem;
       border: 1px solid var(--card-border);
       text-align: center;
       position: relative;
     }
     .feeling-card .label {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-      min-height: 2.4rem;
+      font-size: 1.25rem;
+      line-height: 1.3;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 0.85rem;
+      min-height: 3.4rem;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .feeling-card .percentage {
-      font-size: 3.5rem;
+      font-size: 4.5rem;
       font-weight: 800;
       line-height: 1;
+      letter-spacing: -0.02em;
     }
     .feeling-card .count {
-      font-size: 0.8rem;
+      font-size: 1.05rem;
       color: var(--muted);
-      margin-top: 0.25rem;
+      margin-top: 0.5rem;
     }
     .feeling-card .bar-bg {
-      margin-top: 0.75rem;
-      height: 6px;
+      margin-top: 1rem;
+      height: 8px;
       background: rgba(255,255,255,0.08);
-      border-radius: 3px;
+      border-radius: 4px;
       overflow: hidden;
     }
     .feeling-card .bar-fill {
       height: 100%;
-      border-radius: 3px;
+      border-radius: 4px;
       transition: width 0.8s ease;
     }
     .feeling-card .benchmark {
-      margin-top: 0.6rem;
-      font-size: 0.75rem;
-      color: #64748b;
+      margin-top: 0.85rem;
+      font-size: 0.95rem;
+      color: var(--muted);
     }
     .feeling-card .benchmark span {
-      color: var(--muted);
+      color: var(--text);
       font-weight: 600;
     }
 
@@ -458,10 +466,10 @@
         <h3>The Gap: Congregation Size vs. Staff Proportion</h3>
         <p class="chart-subtitle">English-speaking congregation size (left) vs. pastoral staff serving English ministry (right)</p>
         <div class="gap-container">
-          <div class="chart-container" style="height:340px">
+          <div class="chart-container" style="height:440px">
             <canvas id="chartCongSize"></canvas>
           </div>
-          <div class="chart-container" style="height:340px">
+          <div class="chart-container" style="height:440px">
             <canvas id="chartStaffProp"></canvas>
           </div>
         </div>
@@ -489,7 +497,7 @@
   <!--  TAB 3 — HOW WE'RE DOING                                 -->
   <!-- ══════════════════════════════════════════════════════════ -->
   <div class="panel" id="panel-feelings">
-    <p style="text-align:center;color:var(--muted);margin-bottom:1.5rem;font-size:0.95rem;">In the past 12 months, have you experienced...</p>
+    <p style="text-align:center;color:var(--muted);margin-bottom:1.75rem;font-size:1.35rem;font-weight:500;">In the past 12 months, have you experienced...</p>
     <div class="feelings-grid" id="feelingsGrid"></div>
   </div>
 
@@ -501,14 +509,14 @@
       <h3>How Hopeful Are We About the Future of the Chinese Heritage Church?</h3>
       <div class="hope-pair">
         <div>
-          <p style="text-align:center;color:var(--muted);font-size:0.9rem;margin-bottom:0.75rem;font-weight:600;">Five Years Ago</p>
-          <div class="chart-container" style="height:320px;">
+          <p style="text-align:center;color:var(--muted);font-size:1.3rem;margin-bottom:1rem;font-weight:600;letter-spacing:0.02em;text-transform:uppercase;">Five Years Ago</p>
+          <div class="chart-container" style="height:400px;">
             <canvas id="chartHopePast"></canvas>
           </div>
         </div>
         <div>
-          <p style="text-align:center;color:var(--accent);font-size:0.9rem;margin-bottom:0.75rem;font-weight:600;">Today</p>
-          <div class="chart-container" style="height:320px;">
+          <p style="text-align:center;color:var(--accent);font-size:1.3rem;margin-bottom:1rem;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;">Today</p>
+          <div class="chart-container" style="height:400px;">
             <canvas id="chartHopeToday"></canvas>
           </div>
         </div>
@@ -612,8 +620,10 @@
     // =========================================================
     //  CHART DEFAULTS
     // =========================================================
-    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.color = '#cbd5e1';
     Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+    Chart.defaults.font.size = 16;          // global default — cascades to ticks & legends
+    Chart.defaults.font.weight = '500';
     Chart.register(ChartDataLabels);
 
     // =========================================================
@@ -695,11 +705,12 @@
         responsive: true,
         maintainAspectRatio: false,
         animation: { duration: 600 },
+        layout: { padding: { right: 24, top: 6, bottom: 6 } },
         plugins: {
           legend: { display: false },
           datalabels: {
             color: '#f1f5f9',
-            font: { weight: 'bold', size: 11 },
+            font: { weight: 'bold', size: 17 },
             ...extras.datalabels
           }
         },
@@ -735,14 +746,14 @@
       charts.states = new Chart(document.getElementById('chartStates'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
-        options: baseOpts({ scales: barScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+        options: baseOpts({ scales: barScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 17 } } } })
       });
 
       // Our Churches: Roles (horizontal bar)
       charts.roles = new Chart(document.getElementById('chartRoles'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
-        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 17 } } } })
       });
 
       // Languages (doughnut)
@@ -752,10 +763,10 @@
         options: baseOpts({
           cutout: '50%',
           plugins: {
-            legend: { display: true, position: 'bottom', labels: { color: '#94a3b8', padding: 16, font: { size: 12 } } },
+            legend: { display: true, position: 'bottom', labels: { color: '#cbd5e1', padding: 20, font: { size: 17, weight: '500' } } },
             datalabels: {
               color: '#f1f5f9',
-              font: { weight: 'bold', size: 14 },
+              font: { weight: 'bold', size: 22 },
               formatter: (v) => v
             }
           }
@@ -766,56 +777,56 @@
       charts.congSize = new Chart(document.getElementById('chartCongSize'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: '#3b82f6' }] },
-        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 17 } } } })
       });
 
       // Staff proportion (horizontal bar — right side of gap)
       charts.staffProp = new Chart(document.getElementById('chartStaffProp'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: '#f59e0b' }] },
-        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 17 } } } })
       });
 
       // Age groups (horizontal bar)
       charts.ageGroups = new Chart(document.getElementById('chartAgeGroups'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
-        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 17 } } } })
       });
 
       // Youth retention (horizontal bar)
       charts.youthRetention = new Chart(document.getElementById('chartYouthRetention'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
-        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 17 } } } })
       });
 
       // Hopefulness past (bar)
       charts.hopePast = new Chart(document.getElementById('chartHopePast'), {
         type: 'bar',
-        data: { labels: HOPE_LEVELS.map(l => truncLabel(l, 18)), datasets: [{ data: [0,0,0,0,0], backgroundColor: HOPE_COLORS_PAST }] },
-        options: baseOpts({ scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { maxRotation: 45, font: { size: 10 } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true } }, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 13 } } } })
+        data: { labels: HOPE_LEVELS.map(l => truncLabel(l, 22)), datasets: [{ data: [0,0,0,0,0], backgroundColor: HOPE_COLORS_PAST }] },
+        options: baseOpts({ scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { maxRotation: 30, minRotation: 0, autoSkip: false, font: { size: 14, weight: '500' } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true } }, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 18 } } } })
       });
 
       // Hopefulness today (bar)
       charts.hopeToday = new Chart(document.getElementById('chartHopeToday'), {
         type: 'bar',
-        data: { labels: HOPE_LEVELS.map(l => truncLabel(l, 18)), datasets: [{ data: [0,0,0,0,0], backgroundColor: HOPE_COLORS_TODAY }] },
-        options: baseOpts({ scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { maxRotation: 45, font: { size: 10 } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true } }, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 13 } } } })
+        data: { labels: HOPE_LEVELS.map(l => truncLabel(l, 22)), datasets: [{ data: [0,0,0,0,0], backgroundColor: HOPE_COLORS_TODAY }] },
+        options: baseOpts({ scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { maxRotation: 30, minRotation: 0, autoSkip: false, font: { size: 14, weight: '500' } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true } }, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 18 } } } })
       });
 
       // Trajectory (horizontal bar)
       charts.trajectory = new Chart(document.getElementById('chartTrajectory'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: CHART_COLORS }] },
-        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 17 } } } })
       });
 
       // Hope sources (horizontal bar)
       charts.hopeSources = new Chart(document.getElementById('chartHopeSources'), {
         type: 'bar',
         data: { labels: [], datasets: [{ data: [], backgroundColor: '#22c55e' }] },
-        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 11 } } } })
+        options: baseOpts({ indexAxis: 'y', scales: hBarScales(), plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'end', color: '#f1f5f9', font: { weight: 'bold', size: 17 } } } })
       });
     }
 
@@ -873,7 +884,7 @@
       // ── Roles (checkbox — comma separated) ──
       const roleCounts = countCheckboxValues(rows, COL.ROLE);
       const sortedRoles = sortedEntries(roleCounts);
-      charts.roles.data.labels = sortedRoles.map(s => truncLabel(s[0], 35));
+      charts.roles.data.labels = sortedRoles.map(s => truncLabel(s[0], 28));
       charts.roles.data.datasets[0].data = sortedRoles.map(s => s[1]);
       charts.roles.data.datasets[0].backgroundColor = sortedRoles.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]);
       charts.roles.update();
@@ -920,7 +931,7 @@
       // ── Age groups (checkbox — comma separated) ──
       const ageCounts = countCheckboxValues(rows, COL.AGE_GROUPS);
       const sortedAge = sortedEntries(ageCounts);
-      charts.ageGroups.data.labels = sortedAge.map(s => truncLabel(s[0], 40));
+      charts.ageGroups.data.labels = sortedAge.map(s => truncLabel(s[0], 32));
       charts.ageGroups.data.datasets[0].data = sortedAge.map(s => s[1]);
       charts.ageGroups.data.datasets[0].backgroundColor = sortedAge.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]);
       charts.ageGroups.update();
@@ -928,7 +939,7 @@
       // ── Youth retention (horizontal bar) ──
       const youthCounts = countValues(rows, COL.YOUTH_RETENTION);
       const sortedYouth = sortedEntries(youthCounts);
-      charts.youthRetention.data.labels = sortedYouth.map(s => truncLabel(s[0], 45));
+      charts.youthRetention.data.labels = sortedYouth.map(s => truncLabel(s[0], 36));
       charts.youthRetention.data.datasets[0].data = sortedYouth.map(s => s[1]);
       charts.youthRetention.data.datasets[0].backgroundColor = sortedYouth.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]);
       charts.youthRetention.update();
@@ -952,7 +963,7 @@
       // ── Trajectory ──
       const trajCounts = countValues(rows, COL.TRAJECTORY);
       const sortedTraj = sortedEntries(trajCounts);
-      charts.trajectory.data.labels = sortedTraj.map(s => truncLabel(s[0], 50));
+      charts.trajectory.data.labels = sortedTraj.map(s => truncLabel(s[0], 40));
       charts.trajectory.data.datasets[0].data = sortedTraj.map(s => s[1]);
       charts.trajectory.data.datasets[0].backgroundColor = sortedTraj.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]);
       charts.trajectory.update();
@@ -960,7 +971,7 @@
       // ── Hope sources (checkbox — comma separated) ──
       const hopeSrcCounts = countCheckboxValues(rows, COL.WHAT_GIVES_HOPE);
       const sortedHopeSrc = sortedEntries(hopeSrcCounts);
-      charts.hopeSources.data.labels = sortedHopeSrc.map(s => truncLabel(s[0], 55));
+      charts.hopeSources.data.labels = sortedHopeSrc.map(s => truncLabel(s[0], 44));
       charts.hopeSources.data.datasets[0].data = sortedHopeSrc.map(s => s[1]);
       charts.hopeSources.update();
     }
@@ -973,7 +984,7 @@
       Object.keys(counts).forEach(k => {
         if (!labels.includes(k)) labels.push(k);
       });
-      chart.data.labels = labels.map(l => truncLabel(l, 42));
+      chart.data.labels = labels.map(l => truncLabel(l, 34));
       chart.data.datasets[0].data = labels.map(k => counts[k] || 0);
       chart.data.datasets[0].backgroundColor = color;
       chart.update();
